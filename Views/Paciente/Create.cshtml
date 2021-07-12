@@ -1,0 +1,118 @@
+﻿@model LabCMV.Models.Paciente
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="width: 100%">
+    <div class="col-6">
+        <h2 class="text-primary">Lista de Pacientes</h2>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" onclick="limpar()" class="btn btn-info form-control" data-toggle="modal" data-target="#myModal">Adicionar Novo Cliente</button>
+    </div>
+</div>
+@*Criar uma table*@
+<div class="p-4 border rounded bg-light">
+    <table id="tblData" class="table table-bordered table-responsive-xl" style="width:100%">
+        <thead class="thead-dark">
+            <tr class="table-info">
+                <th>NomeClinica</th>
+                <th>NomePaciente</th>
+                <th>SobrenomePaciente</th>
+                <th>Descricao</th>
+                <th>DataRecebido</th>
+                <th>DataEntregue</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+@*Modal*@
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h2 class="modal-title text-primary text-center">Entrada de trabalhos com nome do paciente</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div style="padding-left:15%; padding-right:15%; padding-bottom:10px;">
+                        <div class="row p-3 border-0">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        </div>
+                        <input type="hidden" id="pacienteId" asp-for="Id"  />
+
+                        <div class="form-row" style="padding-top:10px">
+                            <div class="form-group col-md-6">
+                                <label>Nome  da Clinica</label>
+                                <input asp-for="NomeClinica" id="pacienteNomeClinica" class="form-control" placeholder="Nome da clinica" />
+                                <span asp-validation-for="NomeClinica" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="padding-top:5px">
+                            <div class="form-group col-md-6">
+                                <label>Nome do Paciente</label>
+                                <input asp-for="NomePaciente" id="pacienteNomePaciente" class="form-control" placeholder="Nome do paciente" />
+                                <span asp-validation-for="NomePaciente" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Sobrenome do Paciente</label>
+                                <input asp-for="SobrenomePaciente" id="pacienteSobrenomePaciente" class="form-control" placeholder="Sobrenome do paciente" />
+                                <span asp-validation-for="SobrenomePaciente" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row" style="padding-top:5px">
+
+                            <label>Descrição</label>
+                            <input asp-for="Descricao" id="pacientDescricao" class="form-control" placeholder="Descrição" />
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="form-row" style="padding-top:5px">
+                            <div class="form-group col-md-6">
+                                <label>Data de recebimento</label>
+                                <input asp-for="DataRecebido" id="pacienteDataRecebido" class="form-control" placeholder="Data de Recebimento" />
+                                <span asp-validation-for="DataRecebido" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Data de Entregue</label>
+                                <input asp-for="DataEntregue" id="PacienteDataEntregue" class="form-control" placeholder="Data de Entregue" />
+                                <span asp-validation-for="DataEntregue" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Estado</label>
+                                <select asp-for="Estado" id="pacienteEstado" class="form-control">
+                                    <option value="true">Activo</option>
+                                    <option value="false">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/paciente.js"></script>
+}
+
